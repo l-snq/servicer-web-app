@@ -5,7 +5,37 @@ Welcome to Servicer!
 {% endblock title %}
 
 {% block content %}
-<div class="container">
-    <h1>hello</h1>
-</div>
+<div class="container narrow">
+    <div class="block">
+      <div class="card involved-card" id="about-card">
+        <div class="card-content content is-flex-grow-1">
+          <h3 class="subtitle">What is Servicer?</h3>
+          <p>
+            Servicer is a sustainability initiative aimed at ensuring people ...
+          </p>
+        </div>
+      
+        <footer class="card-footer">
+            <div class="card-footer-item">
+                <button class="button is-primary">
+                    <!-- <p>Join us on Discord!<br /></p> -->
+                    <a href="{% url "register" %}">
+                    <!-- TODO: DISCORD LINK -->
+                    Register for Servicer now!
+                    </a>
+                </button>
+            </div>
+            <div class="card-footer-item">
+                <button class="button is-primary">
+                    <!-- <p>Join us on Discord!<br /></p> -->
+                    <a href="{% url "login" %}">
+                    <!-- TODO: DISCORD LINK -->
+                    Login to your Servicer account!
+                    </a>
+                </button>
+            </div>
+        </footer>
+      </div>
+    </div>
+
 {% endblock content %}
