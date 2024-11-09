@@ -1,4 +1,5 @@
 asgiref==3.8.1
+crispy-bulma==0.11.0
 Django==5.1.2
 django-crispy-forms==2.3
 greenlet==3.0.3
