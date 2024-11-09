@@ -13,13 +13,23 @@
   </head>
   <body>
     {% include "servicerWebsite/header.html" %}
-
     <div class="columns is-flex-direction-column is-fullheight-100vh">
-      {% block content %}
+      <div class="column has-text-centered">
+        <div class="section">
+          <h1 class="title">
+            {% block title %}
+            Test
+            {% endblock title %}
+          </h1>
+        </div>
+        {% block content %}
 
-      {% endblock content%}
+        {% endblock content%}
+      </div>
+
+      {% include "servicerWebsite/footer.html" %}
+
     </div>
 
-    {% include "servicerWebsite/footer.html" %}
   </body>
 </html>
