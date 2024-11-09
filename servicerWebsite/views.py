@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserFeedbackForm
 
 # Create your views here.
 def index(request):
@@ -170,5 +170,24 @@ def marked_complete(request):
     """
 
 
-    context = {"category": "Vacuuming", "user_id": 23745}
+
+    """
+    Below is taken from https://docs.djangoproject.com/en/5.1/topics/forms/
+    """
+
+    # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = UserFeedbackForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect("/feedback-recorded/")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = UserFeedbackForm()
+    context = {"form": form, "category": "Vacuuming", "user_id": 23745}
     return render(request, "servicerWebsite/marked-complete.html", context)
