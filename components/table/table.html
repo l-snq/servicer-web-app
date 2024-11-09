@@ -1,3 +1,14 @@
-{% for row in self.rows.value %}
-    <h1>{{ row }}</h1>
-{% endfor %}
+<div class="table-container">
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            {{ self.cols.value }}
+        </thead>
+        <tbody>
+            {% for row in self.rows.value %}
+                <tr>
+                    {{ row }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
