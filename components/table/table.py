@@ -5,7 +5,7 @@ from django_viewcomponent.fields import RendersManyField, RendersOneField
 @component.register("table")
 class TabsComponent(component.Component):
     cols = RendersOneField(required=True)
-    rows = RendersManyField(required=True)
+    rows = RendersOneField(required=True)
 
     template_name = "table/table.html"
 
