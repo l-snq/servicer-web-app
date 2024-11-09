@@ -61,3 +61,12 @@ def login(request):
             messages.info(request, f'account done not exit plz sign in')
     form = AuthenticationForm()
     return render(request, 'servicerWebsite/login.html', {'form':form, 'title':'log in'})
+
+def about(request):
+    return HttpResponse("Welcome to the About page!")
+
+def tos(request):
+    return HttpResponse("Welcome to the Terms of Service page!")
+
+def contact(request):
+    return HttpResponse("Welcome to the Contact page!")
