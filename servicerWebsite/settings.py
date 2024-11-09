@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'servicerWebsite',
-    "crispy-forms",
-    "crispy-bulma"
+    "crispy_forms",
+    "crispy_bulma"
 ]
 
 MIDDLEWARE = [
