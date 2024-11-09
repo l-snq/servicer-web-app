@@ -83,9 +83,11 @@ def contact(request):
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
 
-def offered_jobs(request):
+def requested_jobs(request):
 
     """
+    Contains offered jobs for a single user.
+
     I'm thinking that the context (the returned dictionary) contains an dict of jobs, where the content is of the form:
     {
         Job1: [Everyone who has offered to complete Job1],
@@ -107,7 +109,7 @@ def offered_jobs(request):
 
     cols = ["Rating", "Location", "Jobs/Week", ""]  # Last element is to provide space for the button
     context = {"jobs": jobs, "cols": cols}
-    return render(request, "servicerWebsite/your-offered-jobs.html", context)
+    return render(request, "servicerWebsite/your-requested-jobs.html", context)
 
 def jobs_for_user_x(request):
 
@@ -202,3 +204,22 @@ def feedback_submitted(request):
 
     context = {"job_id": 34324}
     return render(request, "servicerWebsite/feedback-submitted.html", context)
+
+
+def others_requested_jobs(request):
+
+
+    cat = "Category"
+    loc = "Location"
+    est = "Est. Completion Time (hrs)"
+
+    cols = [cat, loc, est, ""]  # Last element is to provide space for the button
+    jobs = [
+        {cat: "Vacuuming", loc: "Lister", est: 3},
+        {cat: "Dishes", loc: "Lister", est: 0.5},
+        {cat: "Walking the dog", loc: "Hub", est: 1},
+        {cat: "Dusting", loc: "Lister", est: 1},
+    ]
+
+    context = {"jobs": jobs, "cols": cols, "user_id": 23423}
+    return render(request, "servicerWebsite/others-requested-jobs.html", context)

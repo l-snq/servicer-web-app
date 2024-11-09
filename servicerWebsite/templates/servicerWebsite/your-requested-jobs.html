@@ -1,12 +1,13 @@
 {% extends "servicerWebsite/base.html" %}
 {% load viewcomponent_tags %}
 
-{% block title %}Jobs you want Completed{% endblock title %}
+{% block title %}Jobs you want completed{% endblock title %}
 
 {% block content %}
 {% for jobname, offers in jobs.items %}
     <div class="section">
-        <p class="subtitle">{{ jobname }}</p>
+        <p class="title">{{ jobname }}</p>
+        <p class="subtitle">Offers on job <em>{{ jobname }}</em></p>
         <div class="container narrow">
             {% component 'table' table_id='test' as table_test %}
                 {% call table_test.cols %}
@@ -25,7 +26,7 @@
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
-                        <td class="has-text-right"><button class="button is-danger">Test</button></td>
+                        <td class="has-text-right"><button class="button is-danger">See this user's requested jobs</button></td>
                         </tr>
                     {% endfor %}
                 {% endcall %}

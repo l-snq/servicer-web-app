@@ -29,12 +29,13 @@ urlpatterns = [
     path("tos/", views.tos, name = "tos"),
     path("contact/", views.contact, name="contact"),
     path("test/", views.test, name="test"),
-    path("offers/", views.offered_jobs, name="offers"),
+    path("offers/", views.requested_jobs, name="offers"),
     path("offers-x/", views.jobs_for_user_x, name="offers"),
     path("offer-processed/", views.offer_processed, name="process-offer"),
     path("agreed/", views.agreed_jobs, name="agreed"),
     path("completed/", views.marked_complete, name="completed"),
-    path("feedback-submitted/", views.feedback_submitted, name="completed")
+    path("feedback-submitted/", views.feedback_submitted, name="completed"),
+    path("others-requested/", views.others_requested_jobs, name="others-requested"),
 ]
 
 

@@ -8,19 +8,19 @@
 {% block content %}
 <div class="container narrow">
     <form class="box" method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-        {{ form|crispy}}
-    </fieldset>
-    <button style="margin-top: 10px" class="button"><span class="glyphicon glyphicon-log-in"></span>   login</button>
-    </center>
-    <br/>
-    <sub style="text-align: left;">
-        <a href="{% url "register" %}"
-            style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">
-            Don't have account? Sign up
-        </a>
-    </sub>
-  </form>
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy}}
+        </fieldset>
+        <button style="margin-top: 10px" class="button"><span class="glyphicon glyphicon-log-in"></span>   login</button>
+        </center>
+        <br/>
+        <sub style="text-align: left;">
+            <a href="{% url "register" %}"
+                style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">
+                Don't have account? Sign up
+            </a>
+        </sub>
+    </form>
 </center>
 {% endblock content %}
