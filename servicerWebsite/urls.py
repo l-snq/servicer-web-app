@@ -33,7 +33,8 @@ urlpatterns = [
     path("offers-x/", views.jobs_for_user_x, name="offers"),
     path("offer-processed/", views.offer_processed, name="process-offer"),
     path("agreed/", views.agreed_jobs, name="agreed"),
-    path("completed/", views.marked_complete, name="completed")
+    path("completed/", views.marked_complete, name="completed"),
+    path("feedback-submitted/", views.feedback_submitted, name="completed")
 ]
 
 

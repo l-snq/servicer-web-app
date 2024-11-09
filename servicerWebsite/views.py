@@ -191,3 +191,14 @@ def marked_complete(request):
         form = UserFeedbackForm()
     context = {"form": form, "category": "Vacuuming", "user_id": 23745}
     return render(request, "servicerWebsite/marked-complete.html", context)
+
+def feedback_submitted(request):
+
+    """Generates the landing page for confirming a job's feedback has been submitted
+
+    Returns:
+        _type_: _description_
+    """
+
+    context = {"job_id": 34324}
+    return render(request, "servicerWebsite/feedback-submitted.html", context)

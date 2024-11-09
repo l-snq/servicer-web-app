@@ -1,0 +1,24 @@
+{% extends "servicerWebsite/base.html" %}
+
+{% block title %}
+    Your feedback for job {{ job_id }} has been submitted
+{% endblock title %}
+
+{% block content %}
+<div class="container narrow">
+    <div class="block">
+        <a href="offers">
+            <button class="button is-fullwidth redirect-button">
+                Return to your offers
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="/">
+            <button class="button is-fullwidth redirect-button">
+                Return to Home
+            </button>
+        </a>
+    </div>
+</div>
+{% endblock content %}
