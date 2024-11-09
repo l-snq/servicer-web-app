@@ -6,6 +6,12 @@
 {% block content %}
 
 {% component 'table' table_id='test' as table_test %}
+    {% call table_test.rows %}
+        Home
+    {% endcall %}
+    {% call table_test.rows %}
+        5
+    {% endcall %}
 {% endcomponent %}
 
 {% endblock content %}
