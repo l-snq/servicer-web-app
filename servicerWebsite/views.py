@@ -16,3 +16,11 @@ def index(request):
             "servicerWebsite/non_auth_index.html",
             {}
         )
+
+def login(request):
+    # TODO: If already logged in, redirect to auth_index.html
+    return render(
+        request,
+        "servicerWebsite/login.html",
+        {},
+    )

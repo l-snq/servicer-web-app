@@ -15,6 +15,13 @@
     {% include "servicerWebsite/header.html" %}
     <div class="columns is-flex-direction-column is-fullheight-100vh">
       <div class="column has-text-centered">
+        <div class="section">
+          <h1 class="title">
+            {% block title %}
+            Test
+            {% endblock title %}
+          </h1>
+        </div>
         {% block content %}
 
         {% endblock content%}
