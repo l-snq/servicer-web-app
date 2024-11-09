@@ -1,0 +1,26 @@
+{% extends "servicerWebsite/base.html" %}
+
+{% block title %}
+    You've offered to complete <em>{{ job_offered }}</em>
+    for user <em>{{ user_job }}</em>
+    in exchange for <em>{{ requested_job }}</em>!
+{% endblock title %}
+
+{% block content %}
+<div class="container narrow">
+    <div class="block">
+        <a href="offers">
+            <button class="button is-fullwidth redirect-button">
+                Return to your offers
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="/">
+            <button class="button is-fullwidth redirect-button">
+                Return to Home
+            </button>
+        </a>
+    </div>
+</div>
+{% endblock content %}

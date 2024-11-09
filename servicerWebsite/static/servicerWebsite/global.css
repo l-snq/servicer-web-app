@@ -20,6 +20,10 @@ hr, .navbar-menu {
   height: 80px;
 }
 
+.redirect-button {
+  background-color: #ffff00;
+}
+
 #header-logo {
   border-radius: 10px;
   overflow: hidden;
@@ -29,3 +33,4 @@ hr, .navbar-menu {
 #footer-links a {
   color: #555;
 }
+

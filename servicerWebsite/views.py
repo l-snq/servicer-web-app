@@ -110,13 +110,9 @@ def jobs_for_user_x(request):
     """
     Context in this case is an array of jobs for a specified user with user id 'x'
     """
-    jobs = [
-
-    ]
-
     cat = "Category"
     loc = "Location"
-    est = "est. Completion Time (hrs)"
+    est = "Est. Completion Time (hrs)"
 
     cols = [cat, loc, est, ""]  # Last element is to provide space for the button
     jobs = [
@@ -128,3 +124,12 @@ def jobs_for_user_x(request):
 
     context = {"cols": cols, "jobs": jobs, "user_id": 34569438756}
     return render(request, "servicerWebsite/jobs-for-user-x.html", context)
+
+
+def offer_processed(request):
+    context = {
+        "job_offered": "Test Job",
+        "user_job": "Test User",
+        "requested_job": "Test Request",
+    }
+    return render(request, "servicerWebsite/offer-processed.html", context)
