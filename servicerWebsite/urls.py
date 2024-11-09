@@ -31,7 +31,8 @@ urlpatterns = [
     path("test/", views.test, name="test"),
     path("offers/", views.offered_jobs, name="offers"),
     path("offers-x/", views.jobs_for_user_x, name="offers"),
-    path("offer-processed", views.offer_processed, name="process-offer")
+    path("offer-processed/", views.offer_processed, name="process-offer"),
+    path("agreed/", views.agreed_jobs, name="agreed")
 ]
 
 

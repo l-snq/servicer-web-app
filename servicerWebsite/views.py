@@ -137,3 +137,27 @@ def offer_processed(request):
         "requested_job": "Test Request",
     }
     return render(request, "servicerWebsite/offer-processed.html", context)
+
+
+def agreed_jobs(request):
+    """Gets & renders the page for listing all jobs for which mutual agreement has occurred
+
+    Args:
+        request (_type_): _description_
+    """
+
+    user_id = "User ID"
+    cat = "Category"
+    loc = "Location"
+    est = "Est. Completion Time (hrs)"
+
+    cols = [user_id, cat, loc, est, ""]  # Last element is to provide space for the button
+    jobs = [
+        {user_id: 234242, cat: "Vacuuming", loc: "Lister", est: 3},
+        {user_id: 534242, cat: "Dishes", loc: "Lister", est: 0.5},
+        {user_id: 134242, cat: "Walking the dog", loc: "Hub", est: 1},
+        {user_id: 4534242, cat: "Dusting", loc: "Lister", est: 1},
+    ]
+
+    context = {"cols": cols, "jobs": jobs}
+    return render(request, "servicerWebsite/agreed-jobs.html", context)
