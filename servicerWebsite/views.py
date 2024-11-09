@@ -161,3 +161,14 @@ def agreed_jobs(request):
 
     context = {"cols": cols, "jobs": jobs}
     return render(request, "servicerWebsite/agreed-jobs.html", context)
+
+def marked_complete(request):
+    """Marks a specific job as completed, prompts the user to review said job & user
+
+    Args:
+        request (_type_): _description_
+    """
+
+
+    context = {"category": "Vacuuming", "user_id": 23745}
+    return render(request, "servicerWebsite/marked-complete.html", context)
