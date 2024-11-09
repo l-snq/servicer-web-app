@@ -5,13 +5,21 @@
 
 {% block content %}
 
-{% component 'table' table_id='test' as table_test %}
-    {% call table_test.rows %}
-        Home
-    {% endcall %}
-    {% call table_test.rows %}
-        5
-    {% endcall %}
-{% endcomponent %}
+<div class="container narrow">
+    {% component 'table' table_id='test' as table_test %}
+        {% call table_test.cols %}
+            <td>Left</td>
+            <td>Right</td>
+        {% endcall %}
+        {% call table_test.rows %}
+            <td>T1</td>
+            <td>T2</td>
+        {% endcall %}
+        {% call table_test.rows %}
+            <td>B1</td>
+            <td><div class="has-text-right">B2</div></td>
+        {% endcall %}
+    {% endcomponent %}
+</div>
 
 {% endblock content %}

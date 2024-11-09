@@ -1,0 +1,36 @@
+{% extends "servicerWebsite/base.html" %}
+{% load viewcomponent_tags %}
+
+{% block title %}Jobs you want Completed{% endblock title %}
+
+{% block content %}
+{% for jobname, offers in jobs.items %}
+    <div class="section">
+        <p class="subtitle">{{ jobname }}</p>
+        <div class="container narrow">
+            {% component 'table' table_id='test' as table_test %}
+                {% call table_test.cols %}
+                    {% for col in cols %}
+                        <td>{{ col }}</td>
+                    {% endfor %}
+                {% endcall %}
+                {% call table_test.rows %}
+                    {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+                    {% for offer in offers %}
+                        <tr>
+                        {% for k, v in offer.items %}
+                            {% for col in cols %}
+                                {% if k == col %}
+                                    <td>{{ v }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        <td class="has-text-right"><button class="button is-danger">Test</button></td>
+                        </tr>
+                    {% endfor %}
+                {% endcall %}
+            {% endcomponent %}
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}

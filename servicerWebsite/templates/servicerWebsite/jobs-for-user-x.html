@@ -1,0 +1,32 @@
+{% extends "servicerWebsite/base.html" %}
+{% load viewcomponent_tags %}
+
+{% block title %}Jobs user {{ user_id }} wants completed{% endblock title %}
+
+{% block content %}
+<p class="subtitle">{{ jobname }}</p>
+<div class="container narrow">
+    {% component 'table' table_id='test' as table_test %}
+        {% call table_test.cols %}
+            {% for col in cols %}
+                <td>{{ col }}</td>
+            {% endfor %}
+        {% endcall %}
+        {% call table_test.rows %}
+            {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+            {% for job in jobs %}
+                <tr>
+                {% for k, v in job.items %}
+                    {% for col in cols %}
+                        {% if k == col %}
+                            <td>{{ v }}</td>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+                </tr>
+            {% endfor %}
+        {% endcall %}
+    {% endcomponent %}
+</div>
+{% endblock content %}
