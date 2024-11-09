@@ -163,7 +163,7 @@ def offer_processed(request):
 def agreed_jobs(request):
     """Gets & renders the page for listing all jobs for which mutual agreement has occurred
 
-    Query is of the form `get from Agreement where offer.
+    Query is of the form `get from Agreement where offer1.user == signed-in user OR offer2.user == signed-in user`
     """
 
     user_id = "User ID"
@@ -171,7 +171,7 @@ def agreed_jobs(request):
     loc = "Location"
     est = "Est. Completion Time (hrs)"
 
-    cols = [user_id, cat, loc, est, ""]  # Last element is to provide space for the button
+    cols = [user_id, cat, loc, est, "", ""]  # Last element is to provide space for the two buttons
     jobs = [
         {user_id: 234242, cat: "Vacuuming", loc: "Lister", est: 3},
         {user_id: 534242, cat: "Dishes", loc: "Lister", est: 0.5},
@@ -184,6 +184,8 @@ def agreed_jobs(request):
 
 def marked_complete(request):
     """Marks a specific job as completed, prompts the user to review said job & user
+
+    'request' will (though doesn't yet) contain an ID into the Job table. Update the 'complete' parameter to True
 
     Args:
         request (_type_): _description_
@@ -213,8 +215,8 @@ def marked_complete(request):
     return render(request, "servicerWebsite/marked-complete.html", context)
 
 def feedback_submitted(request):
-
-    """Generates the landing page for confirming a job's feedback has been submitted
+    """Generates the landing page for confirming a job's feedback has been submitted.
+    No database interaction as we don't have a feedback table lol
 
     Returns:
         _type_: _description_
@@ -225,7 +227,14 @@ def feedback_submitted(request):
 
 
 def others_requested_jobs(request):
+    """_summary_
 
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     cat = "Category"
     loc = "Location"
@@ -244,7 +253,7 @@ def others_requested_jobs(request):
  
 def mutual_agreement(request):
     """This request returns a webpage notifying a user that mutual consent to perform tasks has occurred
-    between them and someone else. 
+    between them and someone else, and prompts them to visit `agreed/` and send contact information
 
     Args:
         request (_type_): _description_
