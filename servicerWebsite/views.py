@@ -10,10 +10,24 @@ from django.contrib import messages
 def index(request):
     # return HttpResponse("Hi!!! You are at the polls view index.")
     if request.user.is_authenticated:
+
+        cat = "Category"
+        loc = "Location"
+        est = "Est. Completion Time (hrs)"
+
+        cols = [cat, loc, est, ""]  # Last element is to provide space for the button
+        jobs = [
+            {cat: "Vacuuming", loc: "Lister", est: 3},
+            {cat: "Dishes", loc: "Lister", est: 0.5},
+            {cat: "Walking the dog", loc: "Hub", est: 1},
+            {cat: "Dusting", loc: "Lister", est: 1},
+        ]
+
+        context = {"jobs": jobs, "cols": cols, "user_id": 23423}
         return render(
             request,
             "servicerWebsite/auth_index.html",
-            {}
+            context
         )
     else:
         return render(
