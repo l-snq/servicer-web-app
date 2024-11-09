@@ -24,6 +24,7 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
+        exit()
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
@@ -32,14 +33,7 @@ def register(request):
             password = form.cleaned_data.get('password')
             user = User.objects.create_user(username, email, password)
             user.save()
-            ######################### mail system #################################### 
-            htmly = get_template('user/Email.html')
-            d = { 'username': username }
-            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
+
             ################################################################## 
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('login')
