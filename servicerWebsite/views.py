@@ -70,3 +70,7 @@ def tos(request):
 
 def contact(request):
     return HttpResponse("Welcome to the Contact page!")
+    
+
+def test(request):
+    return render(request, "servicerWebsite/test.html", {})

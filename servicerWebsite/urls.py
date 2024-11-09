@@ -28,6 +28,7 @@ urlpatterns = [
     path("about/", views.about, name = 'about'),
     path("tos/", views.tos, name = "tos"),
     path("contact/", views.contact, name="contact")
+    path("test/", views.test, name="test")
 ]
 
 
