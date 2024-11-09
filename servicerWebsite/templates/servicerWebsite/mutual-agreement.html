@@ -1,0 +1,25 @@
+{% extends "servicerWebsite/base.html" %}
+
+{% block title %}You and user {{ other_user_id }} have agreed to complete jobs for each other!{% endblock %}
+
+{% block content %}
+
+<div class="container narrow">
+    <p class="subtitle">Please visit <em>/agreed</em> to send your contact info to the other person!</p>
+    <div class="block">
+        <a href="{% url 'agreed' %}">
+            <button class="button is-fullwidth redirect-button">
+                Visit <em>/agreed</em>
+            </button>
+        </a>
+    </div>
+    <div class="block">
+        <a href="/">
+            <button class="button is-fullwidth redirect-button">
+                Go home
+            </button>
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

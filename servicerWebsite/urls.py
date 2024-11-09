@@ -36,6 +36,7 @@ urlpatterns = [
     path("completed/", views.marked_complete, name="completed"),
     path("feedback-submitted/", views.feedback_submitted, name="completed"),
     path("others-requested/", views.others_requested_jobs, name="others-requested"),
+    path("mutual/", views.mutual_agreement, name="mutual agreement"),
 ]
 
 

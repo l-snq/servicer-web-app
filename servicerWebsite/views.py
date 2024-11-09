@@ -223,3 +223,17 @@ def others_requested_jobs(request):
 
     context = {"jobs": jobs, "cols": cols, "user_id": 23423}
     return render(request, "servicerWebsite/others-requested-jobs.html", context)
+ 
+def mutual_agreement(request):
+    """This request returns a webpage notifying a user that mutual consent to perform tasks has occurred
+    between them and someone else. 
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
+    context = {"other_user_id": 3498756}
+    return render(request, "servicerWebsite/mutual-agreement.html", context)
