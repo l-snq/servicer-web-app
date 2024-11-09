@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, UserFeedbackForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -23,42 +24,44 @@ def index(request):
     
 
 def register(request):
+    form = UserRegisterForm()
+
     if request.method == 'POST':
-        exit()
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = User.objects.create_user(username, email, password)
+            user = form.save(commit=False)
+            user.username = user.username.lower()
             user.save()
+            messages.success(request, 'You have singed up successfully.')
+            auth_login(request, user)
+            return redirect('')
+            
 
-            ################################################################## 
-            messages.success(request, f'Your account has been created ! You are now able to log in')
-            return redirect('login')
-
-    form = UserRegisterForm()
     return render(request, 'servicerWebsite/register.html', {'form': form, 'title':'Register for Servicer'})
   
 
 ################ login forms################################################### 
 def login(request):
+    form = AuthenticationForm()
     if request.method == 'POST':
-  
+        form = AuthenticationForm(request.POST)
         # AuthenticationForm_can_also_be_used__
   
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username = username, password = password)
         if user is not None:
-            form = login(request, user)
+            form = auth_login(request, user)
             messages.success(request, f' welcome {username} !!')
             return redirect('index')
         else:
             messages.info(request, f'account done not exit plz sign in')
-    form = AuthenticationForm()
+
     return render(request, 'servicerWebsite/login.html', {'form':form, 'title':'log in'})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('/')
 
 ################ About Page ################################################### 
 def about(request):
