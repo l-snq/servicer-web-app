@@ -1,0 +1,92 @@
+<footer class="footer">
+  <hr />
+  <div class="has-text-centered">
+    <div class="block">
+      <div class="container is-max-desktop">
+        <div class="columns is-mobile" id="footer-links">
+        <div class="column">
+            <a href="/tos/">Terms of Service</a>
+        </div>
+          <div class="column">
+            <a href="/contact/">Contact</a>
+          </div>
+          <div class="column">
+            <a href="/about/">About</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="container is-max-desktop" style="color: #AAA">
+        <p>Servicer</p>
+      </div>
+    </div>
+
+    <div class="block" id="footer-socials">
+      <div class="container is-max-desktop">
+        <div class="columns is-mobile" id="footer-socials">
+          {% comment %} <!-- DISCORD -->
+          <div class="column">
+            <a href="https://discord.gg/jSZPjemzuq">
+              <!-- TODO: DISCORD LINK -->
+              <Image
+                src={DiscordLogo}
+                width="54"
+                height="54"
+                alt="Edmonton Data Society - Discord"
+              /></a
+            >
+          </div>
+
+          <!-- LINKEDIN -->
+          <div class="column">
+            <a
+              href="https://www.linkedin.com/company/edmonton-data-science-community/"
+              ><Image
+                src={LinkedInLogo}
+                width="48"
+                height="48"
+                alt="Edmonton Data Society - LinkedIn"
+              /></a
+            >
+          </div>
+
+          <!-- GITHUB -->
+          <div class="column">
+            <a href="https://github.com/Edmonton-Data-Science-Community">
+              <Image
+                src={GitHubLogo}
+                width="48"
+                height="48"
+                alt="Edmonton Data Society - GitHub"
+              /></a
+            >
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  #footer-links {
+    margin-bottom: 1rem;
+  }
+
+  #footer-socials {
+    margin-top: 1rem;
+  }
+
+  #footer-socials img {
+    margin: 0 0.5rem;
+  }
+</style>

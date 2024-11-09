@@ -1,0 +1,25 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"/> {% endcomment %}
+    <link rel="stylesheet" href={% static "servicerWebsite/global.css" %}/>
+    <title>Servicer</title>
+  </head>
+  <body>
+    {% include "servicerWebsite/header.html" %}
+
+    <div class="columns is-flex-direction-column is-fullheight-100vh">
+      {% block content %}
+
+      {% endblock content%}
+    </div>
+
+    {% include "servicerWebsite/footer.html" %}
+  </body>
+</html>
