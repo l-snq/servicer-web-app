@@ -83,7 +83,7 @@ def test(request):
 def requested_jobs(request):
 
     """
-    Contains offered jobs for a single user.
+    Contains requested jobs for the currently logged-in user.
 
     I'm thinking that the context (the returned dictionary) contains an dict of jobs, where the content is of the form:
     {
