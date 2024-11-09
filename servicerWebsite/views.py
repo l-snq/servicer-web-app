@@ -48,7 +48,7 @@ def register(request):
             user.save()
             messages.success(request, 'You have singed up successfully.')
             auth_login(request, user)
-            return redirect('')
+            return redirect('index/')
             
 
     return render(request, 'servicerWebsite/register.html', {'form': form, 'title':'Register for Servicer'})
@@ -95,16 +95,20 @@ def test(request):
     return render(request, "servicerWebsite/test.html", {})
 
 def requested_jobs(request):
-
     """
-    Contains requested jobs for the currently logged-in user.
+    Containsd all jobs requested by the currently logged-in user, and offers made on those jobs by other users.
 
-    I'm thinking that the context (the returned dictionary) contains an dict of jobs, where the content is of the form:
+    The context (the returned dictionary) contains an dict of jobs, where the content is of the form:
     {
         Job1: [Everyone who has offered to complete Job1],
         Job2: [Everyone who has offered to complete Job2],
         ...
     }
+
+    where 'Job1', 'Job2', ... are requested by the currently logged in user.
+
+    The queries will be something like `jobs = 'get from Jobs where user == signed-in user'`
+    then `get from Offers where Offers.job IN jobs`
 
     I'll create a temporary table below
     """
@@ -123,9 +127,10 @@ def requested_jobs(request):
     return render(request, "servicerWebsite/your-requested-jobs.html", context)
 
 def jobs_for_user_x(request):
-
     """
-    Context in this case is an array of jobs for a specified user with user id 'x'
+    Returns an array of jobs for a specified username 'X'
+
+    Query will be something like `get from Jobs where user.username == 'X'`
     """
     cat = "Category"
     loc = "Location"
@@ -144,6 +149,9 @@ def jobs_for_user_x(request):
 
 
 def offer_processed(request):
+    """
+    A confirmation screen TODO
+    """
     context = {
         "job_offered": "Test Job",
         "user_job": "Test User",
@@ -155,8 +163,7 @@ def offer_processed(request):
 def agreed_jobs(request):
     """Gets & renders the page for listing all jobs for which mutual agreement has occurred
 
-    Args:
-        request (_type_): _description_
+    Query is of the form `get from Agreement where offer.
     """
 
     user_id = "User ID"
