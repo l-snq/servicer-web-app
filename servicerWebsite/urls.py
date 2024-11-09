@@ -30,6 +30,7 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("test/", views.test, name="test"),
     path("offers/", views.offered_jobs, name="offers"),
+    path("offers-x/", views.jobs_for_user_x, name="offers"),
 ]
 
 
