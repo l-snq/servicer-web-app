@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 class JobType(models.Model):
     category = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.category
+
 class Job(models.Model):
     category = models.ForeignKey(to=JobType, on_delete=models.CASCADE)
     complete = models.BooleanField(default=False)
@@ -15,12 +18,15 @@ class Job(models.Model):
     est_complete_time = models.IntegerField()
 
     def __str__(self):
-        return self.job1
+        return f"{self.user = } - {self.category = }"
 
 
 class Offer(models.Model):
     job = models.ForeignKey(to=Job, on_delete=models.CASCADE)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} -> {self.job.user} & {self.job.category}"
 
 
 class Agreement(models.Model):
