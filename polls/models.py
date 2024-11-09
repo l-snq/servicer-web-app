@@ -19,7 +19,8 @@ class Jobs(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=200)
     time_submitted = models.DateTimeField("date submitted")
-    jobs_offered = models.ForeignKey(Jobs, on_delete=models.CASCADE, null=True)
+    jobs_offered = models.ManyToManyField('Jobs')
+    #models.ForeignKey(Jobs, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
