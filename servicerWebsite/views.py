@@ -62,14 +62,18 @@ def login(request):
     form = AuthenticationForm()
     return render(request, 'servicerWebsite/login.html', {'form':form, 'title':'log in'})
 
+################ About Page ################################################### 
 def about(request):
-    return HttpResponse("Welcome to the About page!")
+    return render(request, "servicerWebsite/about.html")
 
+
+################ Terms of Service Page ################################################### 
 def tos(request):
-    return HttpResponse("Welcome to the Terms of Service page!")
+    return render(request, "servicerWebsite/tos.html")
 
+################ Contact Page ################################################### 
 def contact(request):
-    return HttpResponse("Welcome to the Contact page!")
+    return render(request, "servicerWebsite/contact.html")
     
 
 def test(request):
