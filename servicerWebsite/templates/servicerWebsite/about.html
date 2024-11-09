@@ -3,8 +3,26 @@
 {% load crispy_forms_tags %}
 
 {% comment %} https://www.geeksforgeeks.org/django-sign-up-and-login-with-confirmation-email-python/ {% endcomment %}
-{% block title %}About{% endblock title %}
+
+{% block title %}
+    About
+{% endblock title %}
+
 {% block content %}
- 
+<div class="container">
+    <div class="block">
+      <div class="card involved-card" id="about-card">
+        <div class="card-content content is-fluid">
+          <h3 class="subtitle">What is the purpose of this App?</h3>
+          <p>
+            Servicer is a sustainability initiative designed to assist users with daily chores that they don't<br>
+            like doing or don't have time to do.  We are here to assist you in the exchange of services<br>
+            with other users to make everyone's day better by having the tasks you may not like doing<br>
+            taken care of by other users and in exchange you will provide a service.<br><br>
+            By accessing our site you can search for services that are being offered by other users, and offer your services in return.
+          </p>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
