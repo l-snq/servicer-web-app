@@ -107,4 +107,34 @@ def offered_jobs(request):
 
     cols = ["Rating", "Location", "Jobs/Week", ""]  # Last element is to provide space for the button
     context = {"jobs": jobs, "cols": cols}
+<<<<<<< HEAD
     return render(request, "servicerWebsite/your-offered-jobs.html", context)
+||||||| aaf7d70
+    return render(request, "servicerWebsite/your-offered-jobs.html", context)
+=======
+    return render(request, "servicerWebsite/your-offered-jobs.html", context)
+
+def jobs_for_user_x(request):
+
+    """
+    Context in this case is an array of jobs for a specified user with user id 'x'
+    """
+    jobs = [
+
+    ]
+
+    cat = "Category"
+    loc = "Location"
+    est = "est. Completion Time (hrs)"
+
+    cols = [cat, loc, est, ""]  # Last element is to provide space for the button
+    jobs = [
+        {cat: "Vacuuming", loc: "Lister", est: 3},
+        {cat: "Dishes", loc: "Lister", est: 0.5},
+        {cat: "Walking the dog", loc: "Hub", est: 1},
+        {cat: "Dusting", loc: "Lister", est: 1},
+    ]
+
+    context = {"cols": cols, "jobs": jobs, "user_id": 34569438756}
+    return render(request, "servicerWebsite/jobs-for-user-x.html", context)
+>>>>>>> 783f7ad311f5fdb3793cfde934669c28a8abbc8e
