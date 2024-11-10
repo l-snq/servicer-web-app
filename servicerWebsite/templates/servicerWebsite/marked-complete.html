@@ -1,7 +1,7 @@
 {% extends "servicerWebsite/base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Job <em>{{ category }} </em> for <em>{{ user }}</em> has been marked as <em>Complete</em>{% endblock %}
+{% block title %}Job <em>{{ category }} </em> for <em>{{ username }}</em> has been marked as <em>Complete</em>{% endblock %}
 
 
 {% block content %}
@@ -22,7 +22,7 @@
         </div>
     </section>
 
-    <form class="box" method="POST">
+    <form action="{% url 'completed' %}" class="box" method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
             {{ form|crispy}}

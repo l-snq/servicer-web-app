@@ -265,7 +265,9 @@ def mark_complete(request, pk=None):
         job.save()
         pass
 
-    return HttpResponseRedirect("/complete-feedback/")
+    form = UserFeedbackForm()
+    user = job.user
+    return render(request, "servicerWebsite/marked-complete.html", {"form": form, "category": job.category, "username": user.username})
 
 @login_required(login_url="/login/")
 def mark_uncomplete(request, pk=None):
