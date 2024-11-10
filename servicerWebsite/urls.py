@@ -19,6 +19,9 @@ from django.urls import include, path
 from django.contrib.auth import views as auth
 from . import views
 
+app_name = "servicer"
+
+
 urlpatterns = [
     path("", views.index, name="index"),
     path("index/", views.index, name="index"),
@@ -31,8 +34,8 @@ urlpatterns = [
     path("test/", views.test, name="test"),
     path("requests/", views.requested_jobs, name="requests"),
     path("offer-processed/", views.offer_processed, name="process-offer"),
+    path("complete-feedback/", views.complete_feedback, name="complete-feedback"),
     path("agreed/", views.agreed_jobs, name="agreed"),
-    path("completed/", views.marked_complete, name="completed"),
     path("feedback-submitted/", views.feedback_submitted, name="completed"),
     path("others-requested/", views.others_requested_jobs, name="others-requested"),
     path("mutual/", views.mutual_agreement, name="mutual agreement"),
@@ -40,4 +43,6 @@ urlpatterns = [
     path("documentation/" , views.documentation, name="documentation"),
     path("report_issue/", views.report_issue, name="report_issue"),
 
+    path("delete-request/<int:pk>", views.delete_request, name='delete_request'),
+    path("mark-complete/<int:pk>", views.mark_complete, name='mark_complete')
 ]

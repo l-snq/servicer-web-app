@@ -18,7 +18,7 @@ class Job(models.Model):
     est_complete_time = models.IntegerField()
 
     def __str__(self):
-        return f"{self.user = } - {self.category = }"
+        return f"user: {self.user} - category: {self.category}"
 
 
 class Offer(models.Model):
@@ -32,3 +32,6 @@ class Offer(models.Model):
 class Agreement(models.Model):
     offer1 = models.ForeignKey(to=Offer, related_name="Offer_1", on_delete=models.CASCADE)
     offer2 = models.ForeignKey(to=Offer, related_name="Offer_2", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.offer1} & {self.offer2}"
