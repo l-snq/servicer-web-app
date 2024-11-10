@@ -1,13 +1,12 @@
 {% extends "servicerWebsite/base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}Job <em>{{ Category }} </em> has been marked as <em>Complete</em>{% endblock %}
+{% block title %}Job <em>{{ category }} </em> for <em>{{ user }}</em> has been marked as <em>Complete</em>{% endblock %}
 
 
 {% block content %}
 
 <div class="container narrow">
-
     <div class="block">
         <a href="/">
             <button class="button is-fullwidth redirect-button">

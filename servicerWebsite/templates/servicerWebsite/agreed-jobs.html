@@ -1,7 +1,7 @@
 {% extends "servicerWebsite/base.html" %}
 {% load viewcomponent_tags %}
 
-{% block title %}Jobs you have agreed for others to complete{% endblock title %}
+{% block title %}Jobs you have agreed to complete for others{% endblock title %}
 
 {% block content %}
 <p class="subtitle">{{ jobname }}</p>
@@ -34,13 +34,15 @@
                     </a>
                 </td>
                 {% comment %} Button for marking this job as complete {% endcomment %}
-                <td class="has-text-right">
-                    <a href="#">
+
+                <form action="{% url 'mark_complete' job.job_id %}" method="post">
+                    {% csrf_token %}
+                    <td class="has-text-right">
                         <button class="button is-danger">
                             Mark as Complete
                         </button>
-                    </a>
-                </td>
+                    </td>
+                </form>
                 </tr>
             {% endfor %}
         {% endcall %}
