@@ -39,5 +39,6 @@ urlpatterns = [
     path("mutual/", views.mutual_agreement, name="mutual agreement"),
     path('admin/', admin.site.urls),
     path("documentation/" , views.documentation, name="documentation"),
+    path("report_issue/", views.report_issue, name="report_issue"),
 
 ]

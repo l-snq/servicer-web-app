@@ -1,0 +1,25 @@
+
+{% extends "servicerWebsite/base.html" %}
+{% load crispy_forms_tags %}
+
+{% comment %} https://www.geeksforgeeks.org/django-sign-up-and-login-with-confirmation-email-python/ {% endcomment %}
+
+{% block title %}
+    Report an Issue
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="block">
+      <div class="card involved-card" id="about-card">
+        <div class="card-content content is-fluid">
+          <h3 class="subtitle">There are no issues.  Please don't panic</h3>
+          <p>
+            Open the pod bay doors, HAL. <br>
+            I'm sorry, Dave. I'm afraid I can't do that.
+          </p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
