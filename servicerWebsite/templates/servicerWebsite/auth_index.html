@@ -40,12 +40,10 @@
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
-            <form action="{% url 'express_interest' job.job_id %}" method="POST"> 
-                {% csrf_token %}
-                <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
-            </form> 
-                    {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
-                    {% comment %} </form> {% endcomment %}
+                    <form action="{% url 'express_interest' job.job_id %}" method="POST"> 
+                        {% csrf_token %}
+                        <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+                    </form> 
                     </tr>
                 {% endfor %}
             {% endcall %}
@@ -71,12 +69,10 @@
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
-            <form action="{% url 'remove_interest' job.job_id %}" method="POST"> 
-                {% csrf_token %}
-                <td class="has-text-right"><button class="button is-danger">Remove Interest</button></td>
-            </form> 
-                    {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
-                    {% comment %} </form> {% endcomment %}
+                    <form action="{% url 'remove_interest' job.job_id %}" method="POST"> 
+                        {% csrf_token %}
+                        <td class="has-text-right"><button class="button is-danger">Remove Interest</button></td>
+                    </form> 
                     </tr>
                 {% endfor %}
             {% endcall %}
