@@ -38,5 +38,6 @@ urlpatterns = [
     path("others-requested/", views.others_requested_jobs, name="others-requested"),
     path("mutual/", views.mutual_agreement, name="mutual agreement"),
     path('admin/', admin.site.urls),
+    path("documentation/" , views.documentation, name="documentation"),
 
 ]

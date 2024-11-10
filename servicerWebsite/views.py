@@ -89,7 +89,10 @@ def tos(request):
 ################ Contact Page ################################################### 
 def contact(request):
     return render(request, "servicerWebsite/contact.html")
-    
+
+################ Documentation Page ################################################### 
+def documentation(request):
+    return render(request, "servicerWebsite/documentation.html")    
 
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
