@@ -24,9 +24,10 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-		{% comment %} <form action="{% url %}" method="POST"> {% endcomment %}
+		<form action="{% url "express_interest" %}" method="POST"> 
+			{% csrf_token %}
 			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
-		{% comment %} </form> {% endcomment %}
+		</form> 
                 </tr>
             {% endfor %}
         {% endcall %}
