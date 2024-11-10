@@ -24,9 +24,9 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-		{% comment %} <form action="{% url %}" method="POST"> {% endcomment %}
-			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
-		{% comment %} </form> {% endcomment %}
+                {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
+                    <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+                {% comment %} </form> {% endcomment %}
                 </tr>
             {% endfor %}
         {% endcall %}

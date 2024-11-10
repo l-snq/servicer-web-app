@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Job
  
 class UserRegisterForm(UserCreationForm):
 
@@ -42,3 +43,9 @@ class UserFeedbackForm(forms.Form):
     # https://pypi.org/project/django-ratings/
     # ratings = RatingField(range=5) # 5 possible rating values, 1-5
 
+
+class JobCreationForm(forms.ModelForm):
+    # specify the name of model to use
+    class Meta:
+        model = Job
+        fields = ["category", "est_complete_time"]

@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserFeedbackForm
+from .forms import UserRegisterForm, UserFeedbackForm, JobCreationForm
 from django.contrib import messages
 from django.db.models import Q
 from .models import JobType, Job, User, Agreement
@@ -100,6 +100,26 @@ def documentation(request):
 
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
+
+@login_required(login_url="/login/")
+def create_job(request):
+    # create object of form
+    if request.method == 'POST':         # If method is POST,
+        form = JobCreationForm(request.POST)
+    
+        # check if form data is valid
+        if form.is_valid():
+            # save the form data to model
+            job = form.save(commit=False)
+            job.user = request.user
+            job.save()
+            messages.success(request,
+                             f"Job <em>{job.category}</em> ({job.est_complete_time} hrs) has been created",
+                             extra_tags='safe')
+ 
+    context = {}
+    context['form']= JobCreationForm()
+    return render(request, "servicerWebsite/create-request.html", context)
 
 @login_required(login_url="/login/")
 def requested_jobs(request):
@@ -271,8 +291,12 @@ def delete_request(request, pk):
     job = get_object_or_404(Job, pk=pk)  # Get your current cat
 
     if request.method == 'POST':         # If method is POST,
-        job.delete()                     # delete the cat.
+        job.delete()                     # delete the job.
+        messages.success(request,
+                            f"Job <em>{job.category}</em> ({job.est_complete_time} hrs) has been deleted.",
+                            extra_tags='safe')
 
     return redirect('/requests/')             # Finally, redirect to the homepage.
     # If method is not POST, render the default template.
     # *Note*: Replace 'template_name.html' with your corresponding template name.
+

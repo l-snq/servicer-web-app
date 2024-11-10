@@ -1,0 +1,47 @@
+{% extends "servicerWebsite/base.html" %}
+{% load crispy_forms_tags %}
+
+{% comment %} https://www.geeksforgeeks.org/django-sign-up-and-login-with-confirmation-email-python/ {% endcomment %}
+{% block title %}Log into Servicer{% endblock title %}
+
+{% block content %}
+<div class="container narrow">
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+  {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+        <article class="message is-primary">
+            <div class="message-header">
+                <p class="{{ message.tags }}">
+                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                </p>
+              <button class="delete" aria-label="delete"></button>
+            </div>
+          </article>
+        {% endfor %}
+    {% endif %}
+
+    <form class="box" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy}}
+        </fieldset>
+        <button style="margin-top: 10px" class="button"><span class="glyphicon glyphicon-log-in"></span>Create Request</button>
+        </center>
+    </form>
+</center>
+
+{% endblock %}
