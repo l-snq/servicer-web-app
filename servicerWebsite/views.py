@@ -38,21 +38,22 @@ def index(request):
         )
 
 
-def express_interest(request):
+def express_interest(request, pk):
     """
-    In the for loop, i want to grab THAT job, and then check current users offers. 
+    i want to grab the job in the current row, and then check current users offers. 
     Get the first offer from current user, and then redirect to offer processed.html
     """
+
+    if request.method != 'POST':
+        return redirect('index')
+
     job_id = request.POST.get("job_id")
     if not job_id:
         messages.error(request, "Job is not specified")
+        return redirect('index')
 
-    jobs = []
     # get job id or return 404.
-    job = get_object_or_404(Job, id=job_id)
-    cat = "Category"
-    est = "Est. Completion Time"
-    cols = [cat, est, ""]  # Last element is to provide space for the button
+    job = get_object_or_404(Job, pk=pk)
 
     existing_offer = Offer.objects.first()
     if existing_offer:
@@ -61,12 +62,7 @@ def express_interest(request):
 
     offer = Offer.objects.create(user=request.user, job=job)
 
-    return redirect("offer_processed")
-
-
-    context = {"jobs": jobs, "cols": cols}
-
-    return render(request, "servicerWebsite/auth_index.html", context)
+    return render(request, "servicerWebsite/offer_processed.html")
 
 
 def register(request):
