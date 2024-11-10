@@ -9,6 +9,18 @@
 {% block content %}
 {% comment %} <p class="subtitle">{{ jobname }}</p> {% endcomment %}
 <div class="container narrow">
+    {% if messages %}
+        {% for message in messages %}
+        <article class="message is-primary">
+            <div class="message-header">
+                <p class="{{ message.tags }}">
+                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                </p>
+            </div>
+        </article>
+        {% endfor %}
+    {% endif %}
+
     {% component 'table' table_id='test' as table_test %}
         {% call table_test.cols %}
             {% for col in cols %}
