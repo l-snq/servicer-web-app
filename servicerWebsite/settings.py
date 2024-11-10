@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bulma",
     "django_viewcomponent",
-    "whitenoise.runserver_nostatic",
+    # "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
