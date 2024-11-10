@@ -24,7 +24,9 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+		<form action="{% url %}" method="POST">
+			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+		</form>
                 </tr>
             {% endfor %}
         {% endcall %}
