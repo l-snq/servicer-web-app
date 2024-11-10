@@ -22,7 +22,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <form action="{% url 'delete_request' job.job.id %}" method="post">
+                <form action="{% url 'delete_request' job.job_id %}" method="post">
                     {% csrf_token %}
                     <td class="has-text-right"><button class="button is-danger">Delete Job</button></td>
                 </form>
