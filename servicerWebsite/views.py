@@ -48,7 +48,7 @@ def register(request):
             user.save()
             messages.success(request, 'You have singed up successfully.')
             auth_login(request, user)
-            return redirect('index/')
+            return HttpResponseRedirect('/index/')
             
 
     return render(request, 'servicerWebsite/register.html', {'form': form, 'title':'Register for Servicer'})
