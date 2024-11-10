@@ -38,7 +38,7 @@ def index(request):
         )
 
 
-def express_interest(request):
+def express_interest(request, pk):
     """
     i want to grab the job in the current row, and then check current users offers. 
     Get the first offer from current user, and then redirect to offer processed.html
@@ -53,7 +53,7 @@ def express_interest(request):
         return redirect('index')
 
     # get job id or return 404.
-    job = get_object_or_404(Job, id=job_id)
+    job = get_object_or_404(Job, pk=pk)
 
     existing_offer = Offer.objects.first()
     if existing_offer:
