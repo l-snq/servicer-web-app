@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserFeedbackForm
 from django.contrib import messages
 from .models import JobType, Job, User, Agreement
@@ -101,6 +102,7 @@ def documentation(request):
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
 
+@login_required(login_url="/login/")
 def requested_jobs(request):
     """
     Containsd all jobs requested by the currently logged-in user, with the option to delete some. 
@@ -131,6 +133,7 @@ def requested_jobs(request):
     return render(request, "servicerWebsite/your-requested-jobs.html", context)
 
 
+@login_required(login_url="/login/")
 def offer_processed(request):
     """
     A confirmation screen TODO
@@ -142,7 +145,7 @@ def offer_processed(request):
     }
     return render(request, "servicerWebsite/offer-processed.html", context)
 
-
+@login_required(login_url="/login/")
 def agreed_jobs(request):
     """Gets & renders the page for listing all jobs for which mutual agreement has occurred
 
@@ -173,6 +176,7 @@ def agreed_jobs(request):
     context = {"cols": cols, "jobs": jobs}
     return render(request, "servicerWebsite/agreed-jobs.html", context)
 
+@login_required(login_url="/login/")
 def mark_complete(request, pk=None):
     """Marks a specific job as completed, prompts the user to review said job & user
 
@@ -190,6 +194,7 @@ def mark_complete(request, pk=None):
 
     return HttpResponseRedirect("/complete-feedback/")
 
+@login_required(login_url="/login/")
 def complete_feedback(request):
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
@@ -206,6 +211,7 @@ def complete_feedback(request):
         form = UserFeedbackForm()
     return render(request, "servicerWebsite/marked-complete.html", {"form": form})
 
+@login_required(login_url="/login/")
 def feedback_submitted(request):
     """Generates the landing page for confirming a job's feedback has been submitted.
     No database interaction as we don't have a feedback table lol
@@ -217,7 +223,7 @@ def feedback_submitted(request):
     context = {}
     return render(request, "servicerWebsite/feedback-submitted.html", context)
 
-
+@login_required(login_url="/login/")
 def others_requested_jobs(request):
     """_summary_
 
@@ -243,6 +249,7 @@ def others_requested_jobs(request):
     context = {"jobs": jobs, "cols": cols, "user_id": 23423}
     return render(request, "servicerWebsite/others-requested-jobs.html", context)
  
+@login_required(login_url="/login/")
 def mutual_agreement(request):
     """This request returns a webpage notifying a user that mutual consent to perform tasks has occurred
     between them and someone else, and prompts them to visit `agreed/` and send contact information
@@ -260,7 +267,7 @@ def mutual_agreement(request):
 
 
 ### Non-view deletions
-
+@login_required(login_url="/login/")
 def delete_request(request, pk):
     job = get_object_or_404(Job, pk=pk)  # Get your current cat
 
