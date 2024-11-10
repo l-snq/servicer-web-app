@@ -48,4 +48,5 @@ urlpatterns = [
     path("delete-request/<int:pk>", views.delete_request, name='delete_request'),
     path("mark-complete/<int:pk>", views.mark_complete, name='mark_complete'),
     path("mark-uncomplete/<int:pk>", views.mark_uncomplete, name="mark_uncomplete")
+    patterns('', (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}))
 ]
