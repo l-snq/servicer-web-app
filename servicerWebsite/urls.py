@@ -43,6 +43,6 @@ urlpatterns = [
     path("documentation/" , views.documentation, name="documentation"),
     path("report_issue/", views.report_issue, name="report_issue"),
     path("express_interest/", views.express_interest, name="express_interest"),
-    path("delete-request/<int:pk>", views.delete_request, name='delete_request')
+    path("delete-request/<int:pk>", views.delete_request, name='delete_request'),
     path("mark-complete/<int:pk>", views.mark_complete, name='mark_complete')
 ]
