@@ -1,0 +1,36 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
+
+.is-fullheight-100vh {
+  height: 100vh;
+}
+
+body {
+  font-family: Calibri;
+}
+
+hr, .navbar-menu {
+  background-color: #367735;
+}
+
+.navbar {
+  background-color: #367735;
+  font-family: "Monomaniac One", sans-serif;
+  font-size: 1.3rem;
+  height: 80px;
+}
+
+.redirect-button {
+  background-color: #ffff00;
+}
+
+#header-logo {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Footer stuff */
+#footer-links a {
+  color: #555;
+}
+
