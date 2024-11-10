@@ -46,5 +46,6 @@ urlpatterns = [
     path("express_interest/<int:pk>", views.express_interest, name="express_interest"),
     path("remove_interest/<int:pk>", views.remove_interest, name="remove_interest"),
     path("delete-request/<int:pk>", views.delete_request, name='delete_request'),
-    path("mark-complete/<int:pk>", views.mark_complete, name='mark_complete')
+    path("mark-complete/<int:pk>", views.mark_complete, name='mark_complete'),
+    path("mark-uncomplete/<int:pk>", views.mark_uncomplete, name="mark_uncomplete")
 ]

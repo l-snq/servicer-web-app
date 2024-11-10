@@ -8,46 +8,83 @@
 {% block content %}
 <p class="subtitle">{{ jobname }}</p>
 <div class="container narrow">
-    {% component 'table' table_id='test' as table_test %}
-        {% call table_test.cols %}
-            {% for col in cols %}
-                <td>{{ col }}</td>
-            {% endfor %}
-        {% endcall %}
-        {% call table_test.rows %}
-            {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
-            {% for job in jobs %}
-                <tr>
-                {% for k, v in job.items %}
-                    {% for col in cols %}
-                        {% if k == col %}
-                            <td>{{ v }}</td>
-                        {% endif %}
-                    {% endfor %}
+    <div class="block">
+        <p class="subtitle">Non-completed Jobs</p>
+        {% component 'table' table_id='test' as table_test %}
+            {% call table_test.cols %}
+                {% for col in cols %}
+                    <td>{{ col }}</td>
                 {% endfor %}
+            {% endcall %}
+            {% call table_test.rows %}
+                {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+                {% for job in jobs %}
+                    <tr>
+                    {% for k, v in job.items %}
+                        {% for col in cols %}
+                            {% if k == col %}
+                                <td>{{ v }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
 
-                {% comment %} Button for marking this job as complete {% endcomment %}
-                <td class="has-text-right">
-                    <a href="#">
-                        <button class="button is-danger">
-                            Send contact info
-                            {% comment %} Currently a no-op as we don't do anything with this {% endcomment %}
-                        </button>
-                    </a>
-                </td>
-                {% comment %} Button for marking this job as complete {% endcomment %}
-
-                <form action="{% url 'mark_complete' job.job_id %}" method="post">
-                    {% csrf_token %}
+                    {% comment %} Button for marking this job as complete {% endcomment %}
                     <td class="has-text-right">
-                        <button class="button is-danger">
-                            Mark as Complete
-                        </button>
+                        <a href="#">
+                            <button class="button is-danger">
+                                Send contact info
+                                {% comment %} Currently a no-op as we don't do anything with this {% endcomment %}
+                            </button>
+                        </a>
                     </td>
-                </form>
-                </tr>
-            {% endfor %}
-        {% endcall %}
-    {% endcomponent %}
+                    {% comment %} Button for marking this job as complete {% endcomment %}
+
+                    <form action="{% url 'mark_complete' job.job_id %}" method="post">
+                        {% csrf_token %}
+                        <td class="has-text-right">
+                            <button class="button is-danger">
+                                Mark as Complete
+                            </button>
+                        </td>
+                    </form>
+                    </tr>
+                {% endfor %}
+            {% endcall %}
+        {% endcomponent %}
+    </div>
+
+    <div class="block">
+        <p class="subtitle">Completed Jobs</p>
+        {% component 'table' table_id='test' as table_test %}
+            {% call table_test.cols %}
+                {% for col in cols %}
+                    <td>{{ col }}</td>
+                {% endfor %}
+            {% endcall %}
+            {% call table_test.rows %}
+                {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+                {% for job in completed_jobs %}
+                    <tr>
+                    {% for k, v in job.items %}
+                        {% for col in cols %}
+                            {% if k == col %}
+                                <td>{{ v }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% comment %} Button for marking this job as not-complete {% endcomment %}
+                    <form action="{% url 'mark_uncomplete' job.job_id %}" method="post">
+                        {% csrf_token %}
+                        <td class="has-text-right">
+                            <button class="button is-primary">
+                                Mark as Uncomplete
+                            </button>
+                        </td>
+                    </form>
+                {% endfor %}
+            {% endcall %}
+        {% endcomponent %}
+    </div>
 </div>
 {% endblock content %}

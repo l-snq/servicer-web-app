@@ -227,7 +227,9 @@ def agreed_jobs(request):
         | Agreement.objects.filter(offer2__user=request.user)
     )
 
+
     jobs = []
+    completed_jobs = []
     cols = [user_id, cat, est, "", ""]  # Last element is to provide space for the two buttons
     for agreement in agreements:
         # Figure out which job we agreed to do
@@ -237,9 +239,14 @@ def agreed_jobs(request):
         else:
             job = agreement.offer2.job
             job_user = agreement.offer2.job.user
-        jobs.append({user_id: job_user.username, cat: job.category, est: job.est_complete_time, "job_id": job.id})
 
-    context = {"cols": cols, "jobs": jobs}
+        job_dict = {user_id: job_user.username, cat: job.category, est: job.est_complete_time, "job_id": job.id}
+        if job.complete:
+            completed_jobs.append(job_dict)
+        else:
+            jobs.append(job_dict)
+
+    context = {"cols": cols, "jobs": jobs, "completed_jobs": completed_jobs}
     return render(request, "servicerWebsite/agreed-jobs.html", context)
 
 @login_required(login_url="/login/")
@@ -254,11 +261,22 @@ def mark_complete(request, pk=None):
     job = get_object_or_404(Job, pk=pk)  # Get your current cat
 
     if request.method == 'POST':         # If method is POST,
-        # job.complete = True
-        # job.save()                       # delete the cat.
+        job.complete = True
+        job.save()
         pass
 
     return HttpResponseRedirect("/complete-feedback/")
+
+@login_required(login_url="/login/")
+def mark_uncomplete(request, pk=None):
+    job = get_object_or_404(Job, pk=pk)  # Get your current cat
+
+    if request.method == 'POST':         # If method is POST,
+        job.complete = False
+        job.save()
+        pass
+
+    return HttpResponseRedirect("/agreed/")
 
 @login_required(login_url="/login/")
 def complete_feedback(request):
