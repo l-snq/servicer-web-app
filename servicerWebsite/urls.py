@@ -19,6 +19,9 @@ from django.urls import include, path
 from django.contrib.auth import views as auth
 from . import views
 
+app_name = "servicer"
+
+
 urlpatterns = [
     path("", views.index, name="index"),
     path("index/", views.index, name="index"),
@@ -40,4 +43,5 @@ urlpatterns = [
     path("documentation/" , views.documentation, name="documentation"),
     path("report_issue/", views.report_issue, name="report_issue"),
 
+    path("delete-request/<int:pk>", views.delete_request, name='delete_request')
 ]

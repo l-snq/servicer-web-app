@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
@@ -125,7 +125,7 @@ def requested_jobs(request):
     cols = [cat, est, ""]  # Last element is to provide space for the button
 
     for job in Job.objects.filter(user=request.user):
-        jobs.append({cat: job.category, est: job.est_complete_time})
+        jobs.append({cat: job.category, est: job.est_complete_time, "job": job})
 
     context = {"jobs": jobs, "cols": cols}
     return render(request, "servicerWebsite/your-requested-jobs.html", context)
@@ -247,3 +247,18 @@ def mutual_agreement(request):
 
     context = {"other_user_id": 3498756}
     return render(request, "servicerWebsite/mutual-agreement.html", context)
+
+
+
+### Non-view deletions
+
+def delete_request(request, pk):
+    job = get_object_or_404(Job, pk=pk)  # Get your current cat
+
+    if request.method == 'POST':         # If method is POST,
+        print(f"Deleting job {job}")
+        job.delete()                     # delete the cat.
+
+    return redirect('/requests/')             # Finally, redirect to the homepage.
+    # If method is not POST, render the default template.
+    # *Note*: Replace 'template_name.html' with your corresponding template name.
