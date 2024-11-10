@@ -29,6 +29,8 @@
 			<input type="hidden" name="job_id" value="{{ job.job_id }}">
 			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
 		</form> 
+                {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
+                {% comment %} </form> {% endcomment %}
                 </tr>
             {% endfor %}
         {% endcall %}
