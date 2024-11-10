@@ -22,10 +22,25 @@
           Home
         </a>
   
-        <a class="navbar-item" href="{% url "documentation" %}">
-          Documentation
-        </a>
-  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Services
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/">
+              Jobs
+            </a>
+            <a class="navbar-item" href="{% url "requests" %}">
+              Requests
+            </a>
+            <a class="navbar-item" href="{% url "agreed" %}">
+              Agreed
+            </a>
+          </div>
+        </div>
+        
+
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
@@ -35,8 +50,8 @@
             <a class="navbar-item" href="{% url "about" %}">
               About
             </a>
-            <a class="navbar-item" href="/">
-              Jobs
+            <a class="navbar-item" href="{% url "documentation" %}">
+              Documentation
             </a>
             <a class="navbar-item" href="{% url "contact" %}">
               Contact
@@ -46,8 +61,11 @@
               Report an issue
             </a>
           </div>
+         </a>
         </div>
       </div>
+      
+  
   
       <div class="navbar-end">
         <div class="navbar-item">
