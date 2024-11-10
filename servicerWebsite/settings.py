@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5y82tn=u3+x4y6+ka@d4ku+kpyp83s_@y0^xv*vaa+(ehykn-i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'servicer.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '.herokuapp.com']
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ("bulma",)
