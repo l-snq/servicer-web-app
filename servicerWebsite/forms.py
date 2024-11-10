@@ -48,4 +48,7 @@ class JobCreationForm(forms.ModelForm):
     # specify the name of model to use
     class Meta:
         model = Job
+        labels = {
+            "est_complete_time": "Estimated Time to Complete (hours)"
+        }
         fields = ["category", "est_complete_time"]
