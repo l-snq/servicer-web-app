@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, UserFeedbackForm
 from django.contrib import messages
+from .models import JobType, Job, User, Agreement
 
 # Create your views here.
 def index(request):
@@ -96,8 +97,7 @@ def test(request):
 
 def requested_jobs(request):
     """
-    Containsd all jobs requested by the currently logged-in user, and offers made on those jobs by other users.
-
+    Containsd all jobs requested by the currently logged-in user, with the option to delete some. 
     The context (the returned dictionary) contains an dict of jobs, where the content is of the form:
     {
         Job1: [Everyone who has offered to complete Job1],
@@ -112,40 +112,17 @@ def requested_jobs(request):
 
     I'll create a temporary table below
     """
+    
+    jobs = []
+    cat = "Category"
+    est = "Est. Completion Time"
+    cols = [cat, est, ""]  # Last element is to provide space for the button
 
-    jobs = {
-        "Job1": [
-            {"Rating": 3, "Location": "Lister", "Jobs/Week": 2.1},
-        ],
-        "Job2": [
-            {"Rating": 5, "Location": "Antarctica", "Jobs/Week": 1.1},
-        ],
-    }
+    for job in Job.objects.filter(user=request.user):
+        jobs.append({cat: job.category, est: job.est_complete_time})
 
-    cols = ["Rating", "Location", "Jobs/Week", ""]  # Last element is to provide space for the button
     context = {"jobs": jobs, "cols": cols}
     return render(request, "servicerWebsite/your-requested-jobs.html", context)
-
-def jobs_for_user_x(request):
-    """
-    Returns an array of jobs for a specified username 'X'
-
-    Query will be something like `get from Jobs where user.username == 'X'`
-    """
-    cat = "Category"
-    loc = "Location"
-    est = "Est. Completion Time (hrs)"
-
-    cols = [cat, loc, est, ""]  # Last element is to provide space for the button
-    jobs = [
-        {cat: "Vacuuming", loc: "Lister", est: 3},
-        {cat: "Dishes", loc: "Lister", est: 0.5},
-        {cat: "Walking the dog", loc: "Hub", est: 1},
-        {cat: "Dusting", loc: "Lister", est: 1},
-    ]
-
-    context = {"cols": cols, "jobs": jobs, "user_id": 34569438756}
-    return render(request, "servicerWebsite/jobs-for-user-x.html", context)
 
 
 def offer_processed(request):

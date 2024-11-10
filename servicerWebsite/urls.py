@@ -30,7 +30,6 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("test/", views.test, name="test"),
     path("requests/", views.requested_jobs, name="requests"),
-    path("requests-x/", views.jobs_for_user_x, name="requests"),
     path("offer-processed/", views.offer_processed, name="process-offer"),
     path("agreed/", views.agreed_jobs, name="agreed"),
     path("completed/", views.marked_complete, name="completed"),
