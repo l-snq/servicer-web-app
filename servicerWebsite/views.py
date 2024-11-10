@@ -6,8 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserFeedbackForm
 from django.contrib import messages
+from .models import JobType, Job, Offer, User, Agreement
 from django.db.models import Q
-from .models import JobType, Job, User, Agreement
 
 # Create your views here.
 def index(request):
@@ -36,7 +36,38 @@ def index(request):
             "servicerWebsite/non_auth_index.html",
             {}
         )
-    
+
+
+def express_interest(request):
+    """
+    In the for loop, i want to grab THAT job, and then check current users offers. 
+    Get the first offer from current user, and then redirect to offer processed.html
+    """
+    job_id = request.POST.get("job_id")
+    if not job_id:
+        messages.error(request, "Job is not specified")
+
+    jobs = []
+    # get job id or return 404.
+    job = get_object_or_404(Job, id=job_id)
+    cat = "Category"
+    est = "Est. Completion Time"
+    cols = [cat, est, ""]  # Last element is to provide space for the button
+
+    existing_offer = Offer.objects.first()
+    if existing_offer:
+        messages.info(request, "you have expressed interest in this job")
+        return redirect('index')
+
+    offer = Offer.objects.create(user=request.user, job=job)
+
+    return redirect("offer_processed")
+
+
+    context = {"jobs": jobs, "cols": cols}
+
+    return render(request, "servicerWebsite/auth_index.html", context)
+
 
 def register(request):
     form = UserRegisterForm()
