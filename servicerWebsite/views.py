@@ -48,7 +48,7 @@ def register(request):
             user.save()
             messages.success(request, 'You have singed up successfully.')
             auth_login(request, user)
-            return redirect('index/')
+            return HttpResponseRedirect('/index/')
             
 
     return render(request, 'servicerWebsite/register.html', {'form': form, 'title':'Register for Servicer'})
@@ -89,7 +89,10 @@ def tos(request):
 ################ Contact Page ################################################### 
 def contact(request):
     return render(request, "servicerWebsite/contact.html")
-    
+
+################ Documentation Page ################################################### 
+def documentation(request):
+    return render(request, "servicerWebsite/documentation.html")    
 
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
