@@ -26,6 +26,7 @@
                 {% endfor %}
 		<form action="{% url "express_interest" %}" method="POST"> 
 			{% csrf_token %}
+			<input type="hidden" name="job_id" value="{{ job.job_id }}">
 			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
 		</form> 
                 </tr>
