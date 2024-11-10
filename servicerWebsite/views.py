@@ -82,6 +82,9 @@ def logout(request):
 def about(request):
     return render(request, "servicerWebsite/about.html")
 
+################ Issues Page ################################################### 
+def report_issue(request):
+    return render(request, "servicerWebsite/report_issue.html")
 
 ################ Terms of Service Page ################################################### 
 def tos(request):
@@ -90,7 +93,10 @@ def tos(request):
 ################ Contact Page ################################################### 
 def contact(request):
     return render(request, "servicerWebsite/contact.html")
-    
+
+################ Documentation Page ################################################### 
+def documentation(request):
+    return render(request, "servicerWebsite/documentation.html")    
 
 def test(request):
     return render(request, "servicerWebsite/test.html", {})
