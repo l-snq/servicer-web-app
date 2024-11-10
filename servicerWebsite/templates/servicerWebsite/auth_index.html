@@ -21,32 +21,66 @@
         {% endfor %}
     {% endif %}
 
-    {% component 'table' table_id='test' as table_test %}
-        {% call table_test.cols %}
-            {% for col in cols %}
-                <td>{{ col }}</td>
-            {% endfor %}
-        {% endcall %}
-        {% call table_test.rows %}
-            {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
-            {% for job in jobs %}
-                <tr>
-                {% for k, v in job.items %}
-                    {% for col in cols %}
-                        {% if k == col %}
-                            <td>{{ v }}</td>
-                        {% endif %}
-                    {% endfor %}
+    <div class="block">
+        <p class="subtitle">Available Jobs</p>
+        {% component 'table' table_id='test' as table_test %}
+            {% call table_test.cols %}
+                {% for col in cols %}
+                    <td>{{ col }}</td>
                 {% endfor %}
-		<form action="{% url 'express_interest' job.job_id %}" method="POST"> 
-			{% csrf_token %}
-			<td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
-		</form> 
-                {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
-                {% comment %} </form> {% endcomment %}
-                </tr>
-            {% endfor %}
-        {% endcall %}
-    {% endcomponent %}
+            {% endcall %}
+            {% call table_test.rows %}
+                {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+                {% for job in jobs %}
+                    <tr>
+                    {% for k, v in job.items %}
+                        {% for col in cols %}
+                            {% if k == col %}
+                                <td>{{ v }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+            <form action="{% url 'express_interest' job.job_id %}" method="POST"> 
+                {% csrf_token %}
+                <td class="has-text-right"><button class="button is-danger">Express Interest</button></td>
+            </form> 
+                    {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
+                    {% comment %} </form> {% endcomment %}
+                    </tr>
+                {% endfor %}
+            {% endcall %}
+        {% endcomponent %}
+    </div>
+
+    <div class="block">
+        <p class="subtitle">Jobs you've expressed interest in.</p>
+        {% component 'table' table_id='test' as table_test %}
+            {% call table_test.cols %}
+                {% for col in cols %}
+                    <td>{{ col }}</td>
+                {% endfor %}
+            {% endcall %}
+            {% call table_test.rows %}
+                {% comment %} Quadratic runtime, probably won't matter :P {% endcomment %}
+                {% for job in interested_jobs %}
+                    <tr>
+                    {% for k, v in job.items %}
+                        {% for col in cols %}
+                            {% if k == col %}
+                                <td>{{ v }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+            <form action="{% url 'remove_interest' job.job_id %}" method="POST"> 
+                {% csrf_token %}
+                <td class="has-text-right"><button class="button is-danger">Remove Interest</button></td>
+            </form> 
+                    {% comment %} <form action="{% url 'create-offer' job.job_id %}" method="POST"> {% endcomment %}
+                    {% comment %} </form> {% endcomment %}
+                    </tr>
+                {% endfor %}
+            {% endcall %}
+        {% endcomponent %}
+    </div>
 </div>
 {% endblock content %}

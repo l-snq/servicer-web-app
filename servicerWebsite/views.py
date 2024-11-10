@@ -13,18 +13,23 @@ from django.db.models import Q
 def index(request):
     # return HttpResponse("Hi!!! You are at the polls view index.")
     if request.user.is_authenticated:
-        jobs = []
         cat = "Category"
         est = "Est. Completion Time"
         cols = [cat, est, ""]  # Last element is to provide space for the button
         
-        # All jobs not for currently-logged in user
-        non_user_jobs = Job.objects.filter(~Q(user=request.user))
-
+        # All jobs available not for currently-logged in user
+        user_offers = Offer.objects.filter(user=request.user).values("job")
+        non_user_jobs = Job.objects.filter(~Q(id__in=user_offers), ~Q(user=request.user))
+        jobs = []
         for job in non_user_jobs:
             jobs.append({cat: job.category, est: job.est_complete_time, "job_id": job.id})
 
-        context = {"jobs": jobs, "cols": cols}
+        # Jobs the currently logged-in user has expressed interest in.
+        interests = Job.objects.filter(id__in=user_offers)
+        interested_jobs = []
+        for job in interests:
+            interested_jobs.append({cat: job.category, est: job.est_complete_time, "job_id": job.id})
+        context = {"jobs": jobs, "interested_jobs": interested_jobs, "cols": cols}
         return render(
             request,
             "servicerWebsite/auth_index.html",
@@ -38,32 +43,47 @@ def index(request):
         )
 
 
+@login_required(login_url="/login/")
 def express_interest(request, pk):
     """
     i want to grab the job in the current row, and then check current users offers. 
     Get the first offer from current user, and then redirect to offer processed.html
     """
 
-    if request.method != 'POST':
+    if request.method == 'POST':
+        job = get_object_or_404(Job, pk=pk)
+        offer = Offer.objects.create(user=request.user, job=job)
+        offer.save()
+        messages.success(request,
+                            f"You have expressed interest in <em>{job.category}</em> ({job.est_complete_time} hrs).",
+                            extra_tags='safe')
+        
+        job_user = job.user
+        opposite_offer = Offer.objects.filter(job__user=request.user, user=job.user)
+        if opposite_offer.exists():
+            # Create opposing offer, notify user
+            agreement = Agreement.objects.create(offer1=offer, offer2=opposite_offer.first())
+            agreement.save()
+            messages.info(request,
+                            f"The poster of that job offered to complete one of yours! Check <em>Confirmations</em> for further action.",
+                            extra_tags='safe')
+        
         return redirect('index')
-
-    job_id = request.POST.get("job_id")
-    if not job_id:
-        messages.error(request, "Job is not specified")
-        return redirect('index')
-
-    # get job id or return 404.
-    job = get_object_or_404(Job, pk=pk)
-
-    existing_offer = Offer.objects.first()
-    if existing_offer:
-        messages.info(request, "you have expressed interest in this job")
-        return redirect('index')
-
-    offer = Offer.objects.create(user=request.user, job=job)
 
     return render(request, "servicerWebsite/offer_processed.html")
 
+
+@login_required(login_url="/login/")
+def remove_interest(request, pk):
+    if request.method == 'POST':
+        for offer in Offer.objects.filter(user=request.user, job__id=pk):
+            offer.delete()
+        
+        messages.info(request,
+                        f"Removed interest from job.",
+                        extra_tags='safe')
+        
+    return redirect('/index/')
 
 def register(request):
     form = UserRegisterForm()
